@@ -1,0 +1,23 @@
+{
+  "name": "lol-countdown",
+  "version": "1.0.0",
+  "description": "LoL Countdown is an Electron App where the user can easily follow the enemy summoner spells while in game.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vexleet/lol-countdown.git"
+  },
+  "author": "vexleet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vexleet/lol-countdown/issues"
+  },
+  "homepage": "https://github.com/vexleet/lol-countdown#readme",
+  "devDependencies": {
+    "electron": "^16.0.6"
+  }
+}
