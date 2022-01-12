@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ip } = require('electron')
+const { app, BrowserWindow } = require('electron')
 const fetch = require('electron-fetch').default
 
 function LoLCountdown() {
@@ -7,22 +7,15 @@ function LoLCountdown() {
   this.createWindow = () => {
     win = new BrowserWindow({
       width: 350,
-      height: 105,
-      frame: false,
-      type: 'toolbar'
+      height: 150,
+      // frame: false,
     })
 
     win.loadFile('index.html');
 
-    // app.dock.hide();
-    win.setAlwaysOnTop(true, "floating");
-    win.setVisibleOnAllWorkspaces(true);
-    win.setFullScreenable(false);
-
     // win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     // win.setAlwaysOnTop(true, 'normal');
     // win.setFullScreenable(false);
-    //
     // win.moveTop();
   }
 
@@ -37,6 +30,9 @@ app.commandLine.appendSwitch('ignore-certificate-errors', true);
 
 app.whenReady().then(() => {
   const lolChampWindow = new LoLCountdown();
+
+
+  console.log('Looking for a game...')
   setInterval(() => {
     fetch('https://127.0.0.1:2999/liveclientdata/allgamedata')
       .then((res) => res.json())

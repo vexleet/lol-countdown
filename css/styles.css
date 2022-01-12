@@ -1,0 +1,23 @@
+.champion {
+    width: 100px;
+    background: red;
+}
+
+.champion img{
+    width: 100%;
+}
+
+.champion .summoner-spells {
+    display: flex;
+    margin-top: -5px;
+}
+
+.champion .summoner-spells img {
+    width: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+.summoner-spells img.has-countdown{
+    filter: brightness(0.5);
+}

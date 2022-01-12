@@ -21,6 +21,8 @@
     "electron": "^16.0.6"
   },
   "dependencies": {
-    "electron-fetch": "^1.7.4"
+    "electron-css-reload": "^1.0.8",
+    "electron-fetch": "^1.7.4",
+    "electron-overlay-window": "^2.0.1"
   }
 }

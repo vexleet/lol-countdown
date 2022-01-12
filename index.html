@@ -6,12 +6,21 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Hello World!</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <div class="champion" id="Thresh">
+        <img src="images/Thresh.png" alt="Champion image"/>
 
+        <div class="summoner-spells">
+            <img src="images/summoner-icons/SummonerFlash.png" alt="Summoner icon">
+            <img src="images/summoner-icons/SummonerFlash.png" alt="Summoner icon">
+        </div>
+
+        <span id="time">05:00</span>
+    </div>
+
+    <script src="scripts/summoner-countdown.js"></script>
 </body>
 </html>
