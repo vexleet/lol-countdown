@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const fetch = require('electron-fetch').default
+
 
 function LoLCountdown() {
   let win = undefined;
@@ -9,13 +10,17 @@ function LoLCountdown() {
       width: 350,
       height: 150,
       // frame: false,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      }
     })
 
     win.loadFile('index.html');
 
-    // win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-    // win.setAlwaysOnTop(true, 'normal');
-    // win.setFullScreenable(false);
+    win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    win.setAlwaysOnTop(true, 'normal');
+    win.setFullScreenable(false);
     // win.moveTop();
   }
 
@@ -31,7 +36,6 @@ app.commandLine.appendSwitch('ignore-certificate-errors', true);
 app.whenReady().then(() => {
   const lolChampWindow = new LoLCountdown();
 
-
   console.log('Looking for a game...')
   setInterval(() => {
     fetch('https://127.0.0.1:2999/liveclientdata/allgamedata')
@@ -39,7 +43,11 @@ app.whenReady().then(() => {
       .then((data) => {
         if (data && BrowserWindow.getAllWindows().length === 0) {
           console.log('Opening Window...')
+          ipcMain.once('hasLoaded', (event) => {
+            event.sender.send('asynReply', data);
+          });
           lolChampWindow.createWindow()
+
         }
       }).catch((e) => {
         if(BrowserWindow.getAllWindows().length === 1){

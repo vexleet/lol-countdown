@@ -1,16 +1,15 @@
-(() => {
+function addSummonerSpellsEvent() {
   const summonerSpells = document.querySelectorAll('.summoner-spells .summoner-spell');
 
   summonerSpells.forEach((summonerSpell) => {
     summonerSpell.addEventListener('click', function (e) {
       const parent = e.target.parentNode
-      if(!parent.classList.contains('has-countdown')) {
+      if (!parent.classList.contains('has-countdown')) {
         parent.classList.add('has-countdown');
         let display = parent.querySelector('.has-countdown .time');
 
         addCountdown(60 * 10, display)
-      }
-      else {
+      } else {
         parent.classList.remove('has-countdown');
       }
     });
@@ -32,13 +31,13 @@
       }
 
       display.textContent = minutes + ":" + seconds;
-      }, 1000);
+    }, 1000);
 
     const checkForClass = setInterval(function () {
-      if(!display.parentNode.classList.contains('has-countdown')){
+      if (!display.parentNode.classList.contains('has-countdown')) {
         clearInterval(timeInterval);
         clearInterval(checkForClass)
       }
     }, 100)
   }
-})()
+}
