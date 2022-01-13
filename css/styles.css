@@ -12,12 +12,35 @@
     margin-top: -5px;
 }
 
-.champion .summoner-spells img {
-    width: 50%;
+.champion .summoner-spell img {
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     position: relative;
 }
 
-.summoner-spells img.has-countdown{
+.summoner-spell.has-countdown {
+    position: relative;
+}
+
+.summoner-spell .time {
+    display: none;
+}
+
+.summoner-spell.has-countdown .time {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    pointer-events: none;
+}
+
+.summoner-spell.has-countdown img{
     filter: brightness(0.5);
 }
