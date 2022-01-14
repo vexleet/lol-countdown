@@ -1,28 +1,32 @@
 const ipc = require('electron').ipcRenderer;
 (() => {
-  const body = document.querySelector('body');
+  const championsDiv = document.querySelector('.champions');
+
 
   ipc.sendSync('hasLoaded');
 
   ipc.on('asynReply', (event, args) => {
     const allPlayers = args.allPlayers;
+    const activePlayer = args.activePlayer;
+    const playerTeam = findPlayerTeam(activePlayer, allPlayers);
 
-    allPlayers.forEach((player) => {
+    allPlayers.filter((player) => player.team !== playerTeam).forEach((player) => {
       const summonerSpellsKeys = Object.keys(player.summonerSpells);
       let summonerSpells = '';
       const championName = player.championName.split(' ').join('');
 
       summonerSpellsKeys.forEach((key) => {
+        const summonerSpellName = player.summonerSpells[key].displayName;
         summonerSpells +=`
-        <div class="summoner-spell">
-            <img src="images/summoner-icons/Summoner${player.summonerSpells[key].displayName}.png" alt="Summoner icon">
-            <span class="time">05:00</span>
+        <div class="summoner-spell" data-spellname="${summonerSpellName}">
+            <img src="images/summoner-icons/Summoner${summonerSpellName}.png" alt="Summoner icon">
+            <span class="time">${summonerSpellCountdowns[summonerSpellName]}</span>
         </div>`
       })
 
-      body.insertAdjacentHTML('beforeend', `
+      championsDiv.insertAdjacentHTML('beforeend', `
          <div class="champion" id="${championName}">
-            <img src="images/champion/${championName}.png" alt="Champion image"/>
+            <img src="images/champion/${championName}.png" alt="${championName} Image"/>
     
             <div class="summoner-spells">
                 ${summonerSpells}
@@ -33,4 +37,8 @@ const ipc = require('electron').ipcRenderer;
 
     addSummonerSpellsEvent()
   });
+
+  function findPlayerTeam(activePlayer, champions) {
+    return champions.find((champion) => champion.summonerName === activePlayer.summonerName).team;
+  }
 })()

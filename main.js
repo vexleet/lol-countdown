@@ -1,15 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const fetch = require('electron-fetch').default
 
-
 function LoLCountdown() {
   let win = undefined;
 
   this.createWindow = () => {
     win = new BrowserWindow({
+      height: 120,
       width: 350,
-      height: 150,
-      // frame: false,
+      frame: false,
+      transparent: true,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -43,7 +43,7 @@ app.whenReady().then(() => {
       .then((data) => {
         if (data && BrowserWindow.getAllWindows().length === 0) {
           console.log('Opening Window...')
-          ipcMain.once('hasLoaded', (event) => {
+          ipcMain.on('hasLoaded', (event) => {
             event.sender.send('asynReply', data);
           });
           lolChampWindow.createWindow()

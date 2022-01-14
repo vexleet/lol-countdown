@@ -1,14 +1,29 @@
+const summonerSpellCountdowns = {
+  Teleport: 360,
+  Flash: 300,
+  Heal: 240,
+  Mana: 240,
+  Boost: 210,
+  Exhaust: 210,
+  Haste: 210,
+  Ignite: 180,
+  Barrier: 180,
+  Smite: 90,
+}
+
 function addSummonerSpellsEvent() {
   const summonerSpells = document.querySelectorAll('.summoner-spells .summoner-spell');
 
   summonerSpells.forEach((summonerSpell) => {
     summonerSpell.addEventListener('click', function (e) {
-      const parent = e.target.parentNode
+      const parent = e.target.parentNode;
+      const summonerSpell = parent.dataset.spellname;
+
       if (!parent.classList.contains('has-countdown')) {
         parent.classList.add('has-countdown');
         let display = parent.querySelector('.has-countdown .time');
 
-        addCountdown(60 * 10, display)
+        addCountdown(summonerSpellCountdowns[summonerSpell], display)
       } else {
         parent.classList.remove('has-countdown');
       }
