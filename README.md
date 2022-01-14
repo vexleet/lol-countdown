@@ -12,3 +12,9 @@ Checked that the window doesn't disappear whem the game is borderless so I will 
 The design is simple... Its just the enemy summoner icons with their spells under them. The **logic** is when the user presses on a summoner icon it will start the countdown for this summoner spell
 , if the user presses the icon again it will remove the countdown because there is a chance the user missclicks the needed summoner spell.
 - [Design link](https://xd.adobe.com/view/18099850-eb32-4a4f-9582-20cc500cf34e-4d5a/?hints=off)
+
+
+## Building
+You can build the app with `npm run make`, after running the exe file it stays as a background process looking for a game to start.
+When the game starts you will see the enemy champions with their summoner spells. After the game stops the program will close and 
+start looking for a game to start again.
